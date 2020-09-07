@@ -1,6 +1,6 @@
 # Polygenic scores for height in admixed populations
 
-[Link to manuscript](https://www.biorxiv.org/content/10.1101/2020.04.08.030361v2)
+[Link to manuscript](https://www.g3journal.org/content/early/2020/09/02/g3.120.401658)
 
 ## Contents
 

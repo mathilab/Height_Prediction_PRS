@@ -119,7 +119,7 @@ plot1<-ggplot(df4, aes(x=Quantile, y=R2, colour=Dataset)) +
 geom_point(position=pd) +
 geom_errorbar(aes(ymin=Perc_L, ymax=Perc_U), position = pd) +
 facet_wrap(. ~Set, scales='free_y') + 
-labs(y=expression(paste("Partial R"^"2")), x=paste0("Recombination Rate (cm/",as.character(as.integer(args[3])/10000),"Kb)"))+  
+labs(y=expression(paste("Partial-R"^"2")), x=paste0("Recombination Rate (cm/",as.character(as.integer(args[3])/10000),"Kb)"))+  
 scale_colour_manual(values=c(brewer.pal(4, 'Set1'),"#101010")) +
 theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),panel.background = element_blank(), axis.line = element_line(colour = "black"),legend.title=element_blank(), axis.title.y = element_text(size = 18), axis.title.x=element_text(size=18),axis.text.x=element_text(size=11), axis.text.y=element_text(size=11),legend.text=element_text(size=11),legend.position = "bottom", strip.text.x = element_text(size = 13))+
 scale_x_discrete(labels=my_lev)
@@ -130,7 +130,7 @@ pd <- position_dodge(0.5)
 plot2<-ggplot(df2, aes(x=Quantile, y=R2, colour=Dataset)) +
 geom_point(position=pd) +
 geom_errorbar(aes(ymin=Perc_L, ymax=Perc_U), position = pd) +
-labs(y=expression(paste("Partial R"^"2")), x=paste("Recombination Rate (cm/",as.character(as.integer(args[3])/10000),"Kb)"))+
+labs(y=expression(paste("Partial-R"^"2")), x=paste("Recombination Rate (cm/",as.character(as.integer(args[3])/10000),"Kb)"))+
 scale_colour_manual(values=c(brewer.pal(4, 'Set1'),"#101010")) +
 theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),panel.background = element_blank(), axis.line = element_line(colour = "black"), legend.position = "right", legend.direction='vertical', legend.title=element_blank(), axis.title.y = element_text(size = 18), axis.title.x=element_text(size=18),axis.text.x=element_text(size=15), axis.text.y=element_text(size=15), legend.text=element_text(size=10))+
 scale_x_discrete(labels=my_lev)
@@ -263,17 +263,17 @@ theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),pan
 
 cat('CHECKPOINT 4\n')
 if(args[2]=='AA'){
-png(paste0('figs/Fig3_', args[2], '.png'),  res=300, unit="cm", height=21, width=27)
+png('figs/Fig3.png',  res=600, unit="in", height=9, width=11)
 plot_grid(plot1,plot_grid(c_plot,plot3,labels = c("C", "D"), nrow=1, align='h', rel_widths=c(1,1), axis="t"), nrow=2, labels="A", align="h", axis="l")
 cat('sleep...\n')
 dev.off()
 cat('CHECKPOINT 5\n')
-png(paste0('figs/FigS11_', args[2], '.png'), res=600, unit="cm", height=12, width=12)
+png(paste0('figs/FigS11_', args[2], '.png'), res=600, unit="in", height=9, width=7)
 print(plot4)
 dev.off()
 cat('CHECKPOINT 6\n')
 } else {
-png(paste0('figs/FigS14_', args[2], '.png'),  res=300, width=25, height=21, units="cm")
+png(paste0('figs/FigS14_', args[2], '.png'),  res=600, width=7, height=9, units="in")
 plot_grid(plot1,plot_grid(c_plot,plot3,labels = c("C", "D"), nrow=1, align='h', rel_widths=c(1,1), axis="t"), nrow=2, labels="A", align="h", axis="l")
 cat('CHECKPOINT 7\n')
 dev.off()

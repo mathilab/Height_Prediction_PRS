@@ -75,6 +75,7 @@ ggplot(test_dat_all)+
 
 dev.off()
 
+cor.test(beta2$b, beta2$PLINK)
 gc()
 cat('checkpoint number 4\n')
 whi<-readRDS('gwas/WHI/output/plink_whi.Rds')
@@ -118,6 +119,7 @@ dev.off()
 Store(beta2)
 gc()
 
+cor.test(beta3$b, beta3$PLINK)
 intcpt<-coefficients(lm(beta3$b~beta3$PLINK))[[1]]
 slop<-coefficients(lm(beta3$b~beta3$PLINK))[[2]]
 pdf('figs/beta_cor_PRS.pdf')

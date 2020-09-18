@@ -5,6 +5,8 @@ library(reshape2)
 library(asbio)
 library(ggplot2)
 library(dplyr)
+library(stringr)
+library(gridExtra)
 ########################
 PRS1_all_res<-readRDS(file='loc_anc_analysis/output/PRS1_all_res.Rds')
 PRS2_all_res<-readRDS(file='loc_anc_analysis/output/PRS2_all_res.Rds')
@@ -53,7 +55,7 @@ ggplot(dt2, aes(x=Alpha, y=value,colour=Test))  + facet_wrap(~Dataset)+
 geom_line(size=1.2) + 
 coord_cartesian(xlim=c(0,0.5), ylim=c(0.02, 0.048)) + 
 scale_color_manual(values=c("darkseagreen4", "darkslateblue", "deeppink4", "gray7")) +
-theme(strip.text.x = element_text(size=12), panel.grid.major = element_blank(), panel.grid.minor = element_blank(),panel.background = element_blank(), axis.line = element_line(colour = "black"), axis.title.y = element_text(size = 18), axis.title.x=element_text(size=18),axis.text.x=element_text(size=14, angle=45), axis.text.y=element_text(size=14), legend.key=element_blank(), legend.background=element_blank(),legend.title=element_blank(), legend.text=element_text(size=18)) + labs(x=expression(alpha), y=expression(Partial~R^2))
+theme(strip.text.x = element_text(size=12), panel.grid.major = element_blank(), panel.grid.minor = element_blank(),panel.background = element_blank(), axis.line = element_line(colour = "black"), axis.title.y = element_text(size = 18), axis.title.x=element_text(size=18),axis.text.x=element_text(size=14, angle=45), axis.text.y=element_text(size=14), legend.key=element_blank(), legend.background=element_blank(),legend.title=element_blank(), legend.text=element_text(size=18)) + labs(x=expression(alpha), y=expression(Partial-R^2))
 dev.off()
 
 dt2_WHI<-dt2[Dataset=='WHI_afr']
@@ -64,13 +66,15 @@ dt2_HRS<-dt2[Dataset=='HRS_afr']
 dt2_HRS[,value2:=ifelse(Test=='PRS3', value/PRS3_HRS[[1]], value/PRS3_HRS[[102]])]
 dt3<-rbind(dt2_WHI, dt2_JHS, dt2_HRS)
 
-png("figs/Fig2.png", unit='cm', res=600, height=12, width=17.8)
+pdf("figs/Fig2.pdf",width=7, height=4.5)
 ggplot(dt3, aes(x=Alpha, y=value2,colour=Test))  + facet_wrap(~Dataset) +
 geom_line(size=1.2) +
 geom_hline(yintercept=1, linetype="dashed", color = "darkgray")+
 coord_cartesian(xlim=c(0,0.5), ylim=c(0.5, 1.5)) +
-scale_color_manual(values=c("darkseagreen4", "darkslateblue", "deeppink4", "gray7")) +
+scale_color_manual(values=c("darkseagreen4", "darkslateblue", "deeppink4", "gray7"), labels = c(expression("PRS"[c]^1), expression("PRS"[c]^2), expression("PRS"[c]^3))) +
 #geom_hline(yintercept=1) +
-theme(strip.text.x = element_text(size=12), panel.grid.major = element_blank(), panel.grid.minor = element_blank(),panel.background = element_blank(), axis.line = element_line(colour = "black"), axis.title.y = element_text(size = 18), axis.title.x=element_text(size=18),axis.text.x=element_text(size=14, angle=45), axis.text.y=element_text(size=14), legend.key=element_blank(), legend.background=element_blank(),legend.title=element_blank(), legend.text=element_text(size=18)) + labs(x=expression(alpha), y=expression(Partial~R^2~relative~change))
+theme(strip.text.x = element_text(size=12), panel.grid.major = element_blank(), panel.grid.minor = element_blank(),panel.background = element_blank(), axis.line = element_line(colour = "black"), axis.title.y = element_text(size = 18), axis.title.x=element_text(size=18),axis.text.x=element_text(size=14, angle=45), axis.text.y=element_text(size=14), legend.key=element_blank(), legend.background=element_blank(),legend.title=element_blank(), legend.text=element_text(size=16)) + 
+#labs(x=expression(alpha), y=expression(Partial-~R^2~relative~change))
+labs(x=expression(alpha), y=expression(paste("Partial-R"^"2"~"Relative Change")))
 dev.off()
 

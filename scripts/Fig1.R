@@ -50,7 +50,7 @@ A_plot<-ggplot(ALL, aes(x=Med_Eur_Anc, y=R_sq,colour=Dataset)) +
 #        geom_errorbarh(aes(x=Med_Eur_Anc, group=Dataset, colour=Dataset, xmin=HVB_L, xmax=HVB_U), width=0.05, size=0.5) +
         scale_color_manual(values=my_colrs) + coord_cartesian(ylim = c(0, 0.16)) +
 	scale_shape_manual(values=shapes)+
-        ylab(expression(paste("Partial R"^"2"))) + xlab("European Ancestry Proportion") +
+        ylab(expression(paste("Partial-R"^"2"))) + xlab("European Ancestry Proportion") +
         theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),panel.background = element_blank(), axis.line = element_line(colour = "black"), axis.title.y = element_text(size = 18), axis.title.x=element_text(size=18),axis.text.x=element_text(size=15), 
 	axis.text.y=element_text(size=15), legend.key=element_blank(), legend.background=element_blank(), legend.title=element_blank(), legend.text=element_text(size=15), legend.position=c(0.10,0.85))
 
@@ -77,10 +77,10 @@ B_plot<-ggplot(ALL2, aes(x=Med_Eur_Anc, y=R_sq,colour=Dataset)) +
 	#stat_smooth(data=ALL3,method = "lm", mapping = aes(weight = sqrt(ALL3$W)), col='darkgray', lty=2, lwd=1) +
         scale_color_manual(values=my_colrs) + coord_cartesian(ylim = c(0, 0.16)) + 
 	scale_shape_manual(values=shapes)+
-        ylab(expression(paste("Partial R"^"2"))) + xlab("European Ancestry Proportion") +
-	annotate("text", x=0.40, y=0.07, label=paste("k=1"), size=4.5) +
-	annotate("text", x=0.53, y=0.07, label=paste("k=1.5"), size=4.5) +
-	annotate("text", x=0.71, y=0.07, label=paste("k=2"), size=4.5) +
+        ylab(expression(paste("Partial-R"^"2"))) + xlab("European Ancestry Proportion") +
+	annotate("text", x=0.39, y=0.07, label=paste("k=1"), size=4.5) +
+	annotate("text", x=0.52, y=0.07, label=paste("k=1.5"), size=4.5) +
+	annotate("text", x=0.72, y=0.07, label=paste("k=2"), size=4.5) +
         theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),panel.background = element_blank(), axis.line = element_line(colour = "black"), axis.title.y = element_text(size = 18), axis.title.x=element_text(size=18),axis.text.x=element_text(size=15),
         axis.text.y=element_text(size=15), legend.key=element_blank(), legend.background=element_blank(), legend.title=element_blank(), legend.text=element_text(size=15),legend.position = "none")
 
@@ -90,7 +90,7 @@ B_plot<-ggplot(ALL2, aes(x=Med_Eur_Anc, y=R_sq,colour=Dataset)) +
 #plot_grid(A_plot, B_plot, nrow=1, labels=c('A', 'B'))
 #dev.off()
 
-png('figs/Fig1.png', res=600, unit="cm", height=23, width=17.8)
+pdf('figs/Fig1.pdf',  width=7, height=9)
 plot_grid(A_plot, B_plot, nrow=2, labels=c('A', 'B'))
 dev.off()
 
